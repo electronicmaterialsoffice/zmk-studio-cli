@@ -1,3 +1,6 @@
+# Copyright (c) 2025 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
 """
 ZMK Studio CLI behavior subcommands.
 """

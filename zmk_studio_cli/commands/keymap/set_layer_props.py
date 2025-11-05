@@ -1,3 +1,6 @@
+# Copyright (c) 2025 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
 """
 "zmk-studio-cli keymap get-keymap" command.
 """

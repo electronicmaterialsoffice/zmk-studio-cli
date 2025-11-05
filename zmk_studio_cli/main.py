@@ -1,5 +1,8 @@
+# Copyright (c) 2025 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
 """
-CLI tool to interact with ZMK Studio.
+CLI tool to interact with keyboards via ZMK Studio RPC Protocol
 """
 
 from importlib import metadata

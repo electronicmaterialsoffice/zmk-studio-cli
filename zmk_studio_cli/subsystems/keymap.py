@@ -1,4 +1,4 @@
-# Copyright (c) 2025 Electronic Materials Office Ltd.
+# Copyright (c) 2025 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 
 import serial
