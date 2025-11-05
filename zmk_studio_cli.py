@@ -1,111 +1,183 @@
+import argparse
 import serial
-import core
-import behaviors
-import keymap
-from keymap import BehaviorBinding
 
-ZMK_STUDIO_CLI_CORE = True
-ZMK_STUDIO_CLI_BEHAVIORS = False
-ZMK_STUDIO_CLI_KEYMAP = True
+import requests.core as core
+import requests.behaviors as behaviors
+import requests.keymap as keymap
+from requests.keymap import BehaviorBinding
 
 
-def main():
-    ser = serial.Serial("COM7")
+def zmk_studio_cli(args):
+    ser = serial.Serial(args.port)
+    verbose = args.verbose
 
-    if ZMK_STUDIO_CLI_CORE:
-        core.get_device_info(ser)
-        print("")
-        core.get_lock_state(ser)
-        print("")
-        core.lock(ser)
-        print("")
-        core.get_lock_state(ser)
-        print("")
-        core.reset_settings(ser)
-        print("")
+    if args.get_device_info:
+        core.get_device_info(ser, verbose)
+        return
+    if args.get_lock_state:
+        core.get_lock_state(ser, verbose)
+        return
+    if args.lock:
+        core.lock(ser, verbose)
+        return
+    if args.reset_settings:
+        core.reset_settings(ser, verbose)
+        return
 
-    if ZMK_STUDIO_CLI_BEHAVIORS:
-        behaviors.list_all_behaviors(ser)
-        print("")
-        behaviors.get_behavior_details(ser, 14)
-        print("")
-        behaviors.get_behavior_details(ser, 1)
-        print("")
-        behaviors.get_behavior_details(ser, 4)
-        print("")
-        behaviors.get_behavior_details(ser, 15)
-        print("")
-        behaviors.get_behavior_details(ser, 16)
-        print("")
-        behaviors.get_behavior_details(ser, 17)
-        print("")
-        behaviors.get_behavior_details(ser, 6)
-        print("")
-        behaviors.get_behavior_details(ser, 18)
-        print("")
-        behaviors.get_behavior_details(ser, 19)
-        print("")
-        behaviors.get_behavior_details(ser, 21)
-        print("")
-        behaviors.get_behavior_details(ser, 22)
-        print("")
-        behaviors.get_behavior_details(ser, 2)
-        print("")
-        behaviors.get_behavior_details(ser, 12)
-        print("")
-        behaviors.get_behavior_details(ser, 23)
-        print("")
-        behaviors.get_behavior_details(ser, 3)
-        print("")
-        behaviors.get_behavior_details(ser, 7)
-        print("")
-        behaviors.get_behavior_details(ser, 8)
-        print("")
-        behaviors.get_behavior_details(ser, 26)
-        print("")
-        behaviors.get_behavior_details(ser, 9)
-        print("")
-        behaviors.get_behavior_details(ser, 27)
-        print("")
-        behaviors.get_behavior_details(ser, 5)
-        print("")
-        behaviors.get_behavior_details(ser, 24)
-        print("")
-        behaviors.get_behavior_details(ser, 31)
-        print("")
-        behaviors.get_behavior_details(ser, 32)
-        print("")
-        behaviors.get_behavior_details(ser, 33)
-        print("")
-        behaviors.get_behavior_details(ser, 36)
-        print("")
-        behaviors.get_behavior_details(ser, 20)
-        print("")
-        behaviors.get_behavior_details(ser, 28)
-        print("")
-        behaviors.get_behavior_details(ser, 35)
-        print("")
-        behaviors.get_behavior_details(ser, 10)
-        print("")
-        behaviors.get_behavior_details(ser, 11)
-        print("")
-        behaviors.get_behavior_details(ser, 30)
-        print("")
-        behaviors.get_behavior_details(ser, 13)
-        print("")
+    if args.list_all_behaviors:
+        behaviors.list_all_behaviors(ser, verbose)
+        return
+    if args.get_behavior_details:
+        assert args.behavior_id != None
+        behavior_id = args.behavior_id
+        behaviors.get_behavior_details(ser, behavior_id, verbose)
+        return
 
-    if ZMK_STUDIO_CLI_KEYMAP:
-        keymap.get_keymap(ser)
-        print("")
-        keymap.save_changes(ser)
-        print("")
-        BSPC = BehaviorBinding(4, 458756, 0)
+    if args.get_keymap:
+        keymap.get_keymap(ser, verbose)
+        return
+    if args.set_layer_binding:
+        assert args.layer_id != None
+        assert args.key_position != None
+        assert args.behavior_id != None
 
-        keymap.set_layer_binding(ser, 0, 0, BSPC)
-        keymap.get_keymap(ser)
+        layer_id = args.layer_id
+        key_position = args.key_position
+        behavior_id = args.behavior_id
+        param1 = args.param1 if args.param1 else 0
+        param2 = args.param2 if args.param2 else 0
+        behavior = BehaviorBinding(behavior_id, param1, param2)
+        keymap.set_layer_binding(ser, layer_id, key_position, behavior, verbose)
+        return
+    if args.check_unsaved_changes:
+        keymap.check_unsaved_changes(ser, verbose)
+        return
+    if args.save_changes:
+        keymap.save_changes(ser, verbose)
+        return
+    if args.discard_changes:
+        keymap.discard_changes(ser, verbose)
+        return
+    if args.get_physical_layouts:
+        keymap.get_physical_layouts(ser, verbose)
+        return
+    if args.set_active_physical_layout != None:
+        layout = args.set_active_physical_layout
+        keymap.set_active_physical_layout(ser, layout, verbose)
+        return
+    if args.move_layer:
+        assert args.start_index != None
+        assert args.dest_index != None
+        start_index = args.start_index
+        dest_index = args.dest_index
+        keymap.move_layer(ser, start_index, dest_index, bool)
+        return
+    if args.add_layer:
+        keymap.add_layer(ser, verbose)
+        return
+    if args.remove_layer:
+        assert args.layer_index != None
+        layer_index = args.layer_index
+        keymap.remove_layer(ser, layer_index, bool)
+        return
+    if args.restore_layer:
+        assert args.layer_id != None
+        assert args.layer_index != None
+        layer_id = args.layer_id
+        layer_index = args.layer_index
+        keymap.restore_layer(ser, layer_id, layer_index, verbose)
+        return
+    if args.set_layer_props:
+        assert args.layer_id != None
+        assert args.name != None
+
+        layer_id = args.layer_id
+        name = args.name
+
+        keymap.set_layer_props(ser, layer_id, name, verbose)
+        return
 
 
-try:
-    main()
-except Exception as error:
-    print(error)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(allow_abbrev=False)
+    parser.add_argument("-p", "--port", type=str, required=True, help="Serial Port")
+    parser.add_argument(
+        "-v", "--verbose", action="store_true", help="Enable verbose printing"
+    )
+
+    # Common Arguments
+    parser.add_argument("-l", "--layer-index", type=int, help="Layer index")
+    parser.add_argument("-li", "--layer-id", type=int, help="Layer ID")
+    parser.add_argument("-kp", "--key-position", type=int, help="Key position")
+    parser.add_argument("-b", "--behavior-id", type=int, help="Behavior ID")
+    parser.add_argument("-p1", "--param1", type=int, help="Behavior param1")
+    parser.add_argument("-p2", "--param2", type=int, help="Behavior param2")
+    parser.add_argument("-n", "--name", type=str, help="Layer name")
+    parser.add_argument("-start", "--start-index", type=int, help="Layer move start")
+    parser.add_argument("-dest", "--dest-index", type=int, help="Layer move dest")
+
+    # Core Arguments
+    parser.add_argument(
+        "--get-device-info", action="store_true", help="core: Get device info"
+    )
+    parser.add_argument(
+        "--get-lock-state", action="store_true", help="core: Get lock state"
+    )
+    parser.add_argument("--lock", action="store_true", help="core: Lock keyboard")
+    parser.add_argument(
+        "--reset-settings", action="store_true", help="core: Reset settings"
+    )
+
+    # Behavior Arguments
+    parser.add_argument(
+        "--list-all-behaviors",
+        action="store_true",
+        help="behaviors: List all behaviors",
+    )
+    parser.add_argument(
+        "--get-behavior-details",
+        action="store_true",
+        help="behaviors: Get behavior details",
+    )
+
+    # Keymap Arguments
+    parser.add_argument("--get-keymap", action="store_true", help="keymap: Get keymap")
+    parser.add_argument(
+        "--set-layer-binding", action="store_true", help="keymap: Set layer binding"
+    )
+    parser.add_argument(
+        "--check-unsaved-changes",
+        action="store_true",
+        help="keymap: Check unsaved changes",
+    )
+    parser.add_argument(
+        "--save-changes", action="store_true", help="keymap: Save changes"
+    )
+    parser.add_argument(
+        "--discard-changes", action="store_true", help="keymap: Discard changes"
+    )
+    parser.add_argument(
+        "--get-physical-layouts",
+        action="store_true",
+        help="keymap: Get physical layouts",
+    )
+    parser.add_argument(
+        "--set-active-physical-layout",
+        type=int,
+        help="keymap: Set active physical layout",
+    )
+    parser.add_argument("--move-layer", action="store_true", help="keymap: Move layer")
+    parser.add_argument("--add-layer", action="store_true", help="keymap: Add layer")
+    parser.add_argument(
+        "--remove-layer", action="store_true", help="keymap: Remove layer"
+    )
+    parser.add_argument(
+        "--restore-layer", action="store_true", help="keymap: Restore layer"
+    )
+    parser.add_argument(
+        "--set-layer-props", action="store_true", help="keymap: Set layer properties"
+    )
+
+    args = parser.parse_args()
+
+    zmk_studio_cli(args)

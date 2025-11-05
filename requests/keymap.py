@@ -3,12 +3,13 @@ import proto.studio_pb2 as studio_pb2
 import rpc
 
 
-def get_keymap(ser: serial.Serial):
+def get_keymap(ser: serial.Serial, verbose: bool):
     request = studio_pb2.Request()
     request.request_id = 1
     request.keymap.get_keymap = True
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
 class BehaviorBinding:
@@ -31,98 +32,112 @@ class BehaviorBinding:
 
 
 def set_layer_binding(
-    ser: serial.Serial, layer_id: int, key_position: int, behavior: BehaviorBinding
+    ser: serial.Serial,
+    layer_id: int,
+    key_position: int,
+    behavior: BehaviorBinding,
+    verbose: bool,
 ):
     request = studio_pb2.Request()
-    request.request_id = 1
+    request.request_id = 2
     request.keymap.set_layer_binding.layer_id = layer_id
     request.keymap.set_layer_binding.key_position = key_position
     request.keymap.set_layer_binding.binding.behavior_id = behavior.behavior_id
     request.keymap.set_layer_binding.binding.param1 = behavior.param1
     request.keymap.set_layer_binding.binding.param2 = behavior.param2
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
-def check_unsaved_changes(ser: serial.Serial):
+def check_unsaved_changes(ser: serial.Serial, verbose: bool):
     request = studio_pb2.Request()
-    request.request_id = 1
+    request.request_id = 3
     request.keymap.check_unsaved_changes = True
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
-def save_changes(ser: serial.Serial):
+def save_changes(ser: serial.Serial, verbose: bool):
     request = studio_pb2.Request()
-    request.request_id = 1
+    request.request_id = 4
     request.keymap.save_changes = True
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
-def discard_changes(ser: serial.Serial):
+def discard_changes(ser: serial.Serial, verbose: bool):
     request = studio_pb2.Request()
-    request.request_id = 1
+    request.request_id = 5
     request.keymap.discard_changes = True
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
-def get_physical_layouts(ser: serial.Serial):
+def get_physical_layouts(ser: serial.Serial, verbose: bool):
     request = studio_pb2.Request()
-    request.request_id = 1
+    request.request_id = 6
     request.keymap.get_physical_layouts = True
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
-def set_active_physical_layout(ser: serial.Serial, layout: int):
+def set_active_physical_layout(ser: serial.Serial, layout: int, verbose: bool):
     request = studio_pb2.Request()
-    request.request_id = 1
+    request.request_id = 7
     request.keymap.set_active_physical_layout = layout
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
-def move_layer(ser: serial.Serial, start_index: int, dest_index: int):
+def move_layer(ser: serial.Serial, start_index: int, dest_index: int, verbose: bool):
     request = studio_pb2.Request()
-    request.request_id = 1
+    request.request_id = 8
     request.keymap.move_layer.start_index = start_index
     request.keymap.move_layer.dest_index = dest_index
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
-# Todo: review add layer
-def add_layer(ser: serial.Serial):
+def add_layer(ser: serial.Serial, verbose: bool):
     request = studio_pb2.Request()
-    request.request_id = 1
-    request.keymap.add_layer = True
+    request.request_id = 9
+    request.keymap.add_layer.SetInParent()
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
-def remove_layer(ser: serial.Serial, layer_index: int):
+def remove_layer(ser: serial.Serial, layer_index: int, verbose: bool):
     request = studio_pb2.Request()
-    request.request_id = 1
+    request.request_id = 10
     request.keymap.remove_layer.layer_index = layer_index
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
-def restore_layer(ser: serial.Serial, layer_id: int, at_index: int):
+def restore_layer(ser: serial.Serial, layer_id: int, at_index: int, verbose: bool):
     request = studio_pb2.Request()
-    request.request_id = 1
+    request.request_id = 11
     request.keymap.restore_layer.layer_id = layer_id
     request.keymap.restore_layer.at_index = at_index
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)
 
 
-def set_layer_props(ser: serial.Serial, layer_id: int, name: str):
+def set_layer_props(ser: serial.Serial, layer_id: int, name: str, verbose: bool):
     request = studio_pb2.Request()
-    request.request_id = 1
+    request.request_id = 12
     request.keymap.set_layer_props.layer_id = layer_id
     request.keymap.set_layer_props.name = name
+
     rpc.send_request(ser, request)
-    rpc.handle_response(ser)
+    rpc.handle_response(ser, verbose)

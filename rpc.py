@@ -22,7 +22,7 @@ def send_request(ser: serial.Serial, request: bytes):
     ser.write(RPC_EOF)
 
 
-def handle_response(ser: serial.Serial):
+def handle_response(ser: serial.Serial, verbose: bool):
     response_msg = b""
     response_chr = ser.read()
     if response_chr == RPC_SOF:
@@ -36,7 +36,9 @@ def handle_response(ser: serial.Serial):
                 break
             response_msg = response_msg + response_chr
 
-    # print(response_msg)
+    if verbose:
+        print(response_msg)
+
     response = studio_pb2.Response()
     notification = studio_pb2.Notification()
     try:
