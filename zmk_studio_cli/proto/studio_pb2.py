@@ -18,10 +18,10 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-import proto.meta_pb2 as meta__pb2
-import proto.core_pb2 as core__pb2
-import proto.behaviors_pb2 as behaviors__pb2
-import proto.keymap_pb2 as keymap__pb2
+from . import meta_pb2 as meta__pb2
+from . import core_pb2 as core__pb2
+from . import behaviors_pb2 as behaviors__pb2
+from . import keymap_pb2 as keymap__pb2
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(

@@ -1,0 +1,64 @@
+[project]
+name = "zmk-studio-cli"
+description = "A command line program to interact with ZMK Studio"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development",
+  "Topic :: Utilities",
+]
+dependencies = [
+  "backports.strenum; python_version < '3.11'",
+  "dacite >= 1.9.2, < 2.0.0",
+  "rich >= 14.1.0, < 15.0.0",
+  "shellingham >= 1.5.4, < 2.0.0",
+  "typer >= 0.16.0, < 0.17.0",
+  "protobuf >= 6.33.0, < 7.0.0",
+  "pyserial >= 3.5, < 4.0",
+]
+dynamic = ["version"]
+
+[project.urls]
+Chat = "https://zmk.dev/community/discord/invite"
+Documentation = "https://zmk.dev/docs"
+
+[project.scripts]
+zmk-studio-cli = "zmk_studio_cli.main:app"
+
+[project.optional-dependencies]
+dev = ["pre-commit", "pylint", "pyright"]
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.MAIN]
+ignore = "_version.py"
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+  "arguments-differ",  # Covered by pyright
+  "fixme",
+  "too-few-public-methods",
+  "too-many-arguments",
+  "too-many-branches",
+  "too-many-instance-attributes",
+  "too-many-locals",
+  "too-many-positional-arguments",
+]
+
+[tool.setuptools]
+packages = ["zmk_studio_cli"]
+
+[tool.setuptools_scm]
+version_file = "zmk_studio_cli/_version.py"
