@@ -108,7 +108,7 @@ if __name__ == "__main__":
         "-v", "--verbose", action="store_true", help="Enable verbose printing"
     )
 
-    # Common Arguments
+    # Parameter Arguments
     parser.add_argument("-l", "--layer-index", type=int, help="Layer index")
     parser.add_argument("-li", "--layer-id", type=int, help="Layer ID")
     parser.add_argument("-kp", "--key-position", type=int, help="Key position")
