@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Electronic Materials Office Ltd.
+# SPDX-License-Identifier: MIT
+
 import serial
 import proto.studio_pb2 as studio
 import rpc.core
