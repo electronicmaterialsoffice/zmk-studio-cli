@@ -9,72 +9,69 @@ Precompiled versions of the Protobuf files from [`zmk-studio-messages`](https://
 ## Setup
 
 1. Install Python
-1. `pip install protobuf`
-1. `pip install pyserial`
+1. `pip install -e ".[dev]"`
 
 ## Usage
 
 Currently, only USB transport is available.
+After installing ZMK Studio CLI, you may invoke commands in the following format:
 
-Using the script is as simple as running `python zmk_studio_cli.py`.
-There are a few additional arguments to take note of:
+`zmk-studio-cli [OPTIONS] <subsystem> <command>`
 
-### General
+### Options
 
-| Argument          | Description                        |
-| ----------------- | ---------------------------------- |
-| `-p`, `--port`    | Serial port to use. **Mandatory.** |
-| `-v`, `--verbose` | Enable verbose printing            |
+| Option                 | Description                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| `-p`, `--port`         | Serial port to use with USB transport. **[required]**                           |
+| `-v`, `--version`      | Print version and exit.                                                         |
+| `--install-completion` | Install completion for the current shell                                        |
+| `--show-completion`    | Show completion for the current shell, to copy it or customize the installation |
+| `--help`               | Show help message and exit.                                                     |
 
-### Parameters
+### Subsystems
 
-| Argument                  | Description                  |
-| ------------------------- | ---------------------------- |
-| `-l`, `--layer-index`     | Order-dependent Layer Index  |
-| `-li`, `--layer-id`       | Order-independent Layer ID   |
-| `-kp`, `--key-position`   | Key position                 |
-| `-b`, `--behavior-id`     | Behavior ID                  |
-| `-p1`, `--param1`         | Behavior Parameter 1         |
-| `-p2`, `--param2`         | Behavior Parameter 2         |
-| `-n`, `--name`            | Layer Name                   |
-| `-start`, `--start-index` | Layer Move start index       |
-| `-dest`, `--dest-index`   | Layer Move destination index |
+| Subsystem | Description                      |
+| --------- | -------------------------------- |
+| core      | Get system information and state |
+| behaviors | Get stored behavior information  |
+| keymap    | Get/set keymap data              |
 
 ### Core
 
-| Argument            | Description                                                                 |
-| ------------------- | --------------------------------------------------------------------------- |
-| `--get-device-info` | Get keyboard name and serial number                                         |
-| `--get-lock-state`  | Get ZMK Studio lock state                                                   |
-| `--lock`            | Set ZMK Studio lock state, **Currently always returns error RPC_NOT_FOUND** |
-| `--reset-settings`  | Reset ZMK Studio settings                                                   |
+| Command           | Description                                                                 |
+| ----------------- | --------------------------------------------------------------------------- |
+| `get-device-info` | Get keyboard name and serial number                                         |
+| `get-lock-state`  | Get ZMK Studio lock state                                                   |
+| `lock`            | Set ZMK Studio lock state, **Currently always returns error RPC_NOT_FOUND** |
+| `reset-settings`  | Reset ZMK Studio settings                                                   |
 
 ### Behaviors
 
-| Argument                 | Description                                            | Required Parameters |
-| ------------------------ | ------------------------------------------------------ | ------------------- |
-| `--list-all-behaviors`   | List all behaviors stored on the keyboard by their IDs |                     |
-| `--get-behavior-details` | Get a behavior's name and metadata from its ID         | Behavior ID         |
+| Command                | Description                                            | Required Parameters |
+| ---------------------- | ------------------------------------------------------ | ------------------- |
+| `list-all-behaviors`   | List all behaviors stored on the keyboard by their IDs |                     |
+| `get-behavior-details` | Get a behavior's name and metadata from its ID         | Behavior ID         |
 
 ### Keymaps
 
-| Argument                       | Description                                                                         | Required Parameters                 | Optional Parameters |
-| ------------------------------ | ----------------------------------------------------------------------------------- | ----------------------------------- | ------------------- |
-| `--get-keymap`                 | Print the keymap                                                                    |                                     |                     |
-| `--set-layer-binding`          | Set a keybind on a specifc layer to the chosen behavior                             | Layer ID, Key Position, Behavior ID | Param1, Param2      |
-| `--check-unsaved-changes`      | Check for unsaved keymap changes                                                    |                                     |                     |
-| `--save-changes`               | Save keymap changes                                                                 |                                     |                     |
-| `--discard-changes`            | Discard keymap changes                                                              |                                     |                     |
-| `--get-physical-layouts`       | Print all physical layouts                                                          |                                     |                     |
-| `--set-active-physical-layout` | Set the active physical layout                                                      |                                     |                     |
-| `--move-layer`                 | Move a layer from a start index to a destination index                              | Start Index, Destination Index      |                     |
-| `--add-layer`                  | Add a layer to the keymap                                                           |                                     |                     |
-| `--remove-layer`               | Remove a layer from the keymap at a chosen layer index                              | Layer Index                         |                     |
-| `--restore-layer`              | Restore a layer with the chosen layer ID to the keymap at the specified layer index | Layer ID, Layer Index               |                     |
-| `--set-layer-props`            | Set layer properties at a specific layer ID                                         | Layer ID, Layer Name                |                     |
+| Command                      | Description                                                                         | Required Parameters                 | Optional Parameters |
+| ---------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------- | ------------------- |
+| `get-keymap`                 | Print the keymap                                                                    |                                     |                     |
+| `set-layer-binding`          | Set a keybind on a specifc layer to the chosen behavior                             | Layer ID, Key Position, Behavior ID | Param1, Param2      |
+| `check-unsaved-changes`      | Check for unsaved keymap changes                                                    |                                     |                     |
+| `save-changes`               | Save keymap changes                                                                 |                                     |                     |
+| `discard-changes`            | Discard keymap changes                                                              |                                     |                     |
+| `get-physical-layouts`       | Print all physical layouts                                                          |                                     |                     |
+| `set-active-physical-layout` | Set the active physical layout                                                      |                                     |                     |
+| `move-layer`                 | Move a layer from a start index to a destination index                              | Start Index, Destination Index      |                     |
+| `add-layer`                  | Add a layer to the keymap                                                           |                                     |                     |
+| `remove-layer`               | Remove a layer from the keymap at a chosen layer index                              | Layer Index                         |                     |
+| `restore-layer`              | Restore a layer with the chosen layer ID to the keymap at the specified layer index | Layer ID, Layer Index               |                     |
+| `set-layer-props`            | Set layer properties at a specific layer ID                                         | Layer ID, Layer Name                |                     |
 
 ## References
 
 1. https://protobuf.dev/programming-guides/proto3/
 1. https://protobuf.dev/getting-started/pythontutorial/
 1. https://zmk.dev/docs/features/studio
+1. https://github.com/zmkfirmware/zmk-cli
