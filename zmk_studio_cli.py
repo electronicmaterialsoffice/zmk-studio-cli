@@ -1,10 +1,10 @@
 import argparse
 import serial
 
-import requests.core as core
-import requests.behaviors as behaviors
-import requests.keymap as keymap
-from requests.keymap import BehaviorBinding
+import rpc.core as core
+import rpc.behaviors as behaviors
+import rpc.keymap as keymap
+from rpc.keymap import BehaviorBinding
 
 
 def zmk_studio_cli(args):

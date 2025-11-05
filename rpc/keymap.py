@@ -1,10 +1,24 @@
 import serial
-import proto.studio_pb2 as studio_pb2
-import rpc
+import proto.studio_pb2 as studio
+import rpc.rpc as rpc
+
+SaveChangesErrorCode = ["OK", "GENERIC", "NOT_SUPPORTED", "NO_SPACE"]
+SetLayerBindingResponse = [
+    "OK",
+    "INVALID_LOCATION",
+    "INVALID_BEHAVIOR",
+    "INVALID_PARAMETERS",
+]
+MoveLayerErrorCode = ["OK", "GENERIC", "INVALID_LAYER", "INVALID_DESTINATION"]
+AddLayerErrorCode = ["OK", "GENERIC", "NO_SPACE"]
+RemoveLayerErrorCode = ["OK", "GENERIC", "INVALID_INDEX"]
+RestoreLayerErrorCode = ["OK", "GENERIC", "INVALID_ID", "INVALID_INDEX"]
+SetLayerPropsResponse = ["OK", "GENERIC", "INVALID_ID"]
+SetActivePhysicalLayoutErrorCode = ["OK", "GENERIC", "INVALID_LAYOUT_INDEX"]
 
 
 def get_keymap(ser: serial.Serial, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 1
     request.keymap.get_keymap = True
 
@@ -38,7 +52,7 @@ def set_layer_binding(
     behavior: BehaviorBinding,
     verbose: bool,
 ):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 2
     request.keymap.set_layer_binding.layer_id = layer_id
     request.keymap.set_layer_binding.key_position = key_position
@@ -51,7 +65,7 @@ def set_layer_binding(
 
 
 def check_unsaved_changes(ser: serial.Serial, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 3
     request.keymap.check_unsaved_changes = True
 
@@ -60,7 +74,7 @@ def check_unsaved_changes(ser: serial.Serial, verbose: bool):
 
 
 def save_changes(ser: serial.Serial, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 4
     request.keymap.save_changes = True
 
@@ -69,7 +83,7 @@ def save_changes(ser: serial.Serial, verbose: bool):
 
 
 def discard_changes(ser: serial.Serial, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 5
     request.keymap.discard_changes = True
 
@@ -78,7 +92,7 @@ def discard_changes(ser: serial.Serial, verbose: bool):
 
 
 def get_physical_layouts(ser: serial.Serial, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 6
     request.keymap.get_physical_layouts = True
 
@@ -87,7 +101,7 @@ def get_physical_layouts(ser: serial.Serial, verbose: bool):
 
 
 def set_active_physical_layout(ser: serial.Serial, layout: int, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 7
     request.keymap.set_active_physical_layout = layout
 
@@ -96,7 +110,7 @@ def set_active_physical_layout(ser: serial.Serial, layout: int, verbose: bool):
 
 
 def move_layer(ser: serial.Serial, start_index: int, dest_index: int, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 8
     request.keymap.move_layer.start_index = start_index
     request.keymap.move_layer.dest_index = dest_index
@@ -106,7 +120,7 @@ def move_layer(ser: serial.Serial, start_index: int, dest_index: int, verbose: b
 
 
 def add_layer(ser: serial.Serial, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 9
     request.keymap.add_layer.SetInParent()
 
@@ -115,7 +129,7 @@ def add_layer(ser: serial.Serial, verbose: bool):
 
 
 def remove_layer(ser: serial.Serial, layer_index: int, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 10
     request.keymap.remove_layer.layer_index = layer_index
 
@@ -124,7 +138,7 @@ def remove_layer(ser: serial.Serial, layer_index: int, verbose: bool):
 
 
 def restore_layer(ser: serial.Serial, layer_id: int, at_index: int, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 11
     request.keymap.restore_layer.layer_id = layer_id
     request.keymap.restore_layer.at_index = at_index
@@ -134,7 +148,7 @@ def restore_layer(ser: serial.Serial, layer_id: int, at_index: int, verbose: boo
 
 
 def set_layer_props(ser: serial.Serial, layer_id: int, name: str, verbose: bool):
-    request = studio_pb2.Request()
+    request = studio.Request()
     request.request_id = 12
     request.keymap.set_layer_props.layer_id = layer_id
     request.keymap.set_layer_props.name = name
