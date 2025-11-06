@@ -104,9 +104,10 @@ def handle_response_core(request_response_core: any):
 def handle_response_behaviors(request_response_behaviors: any):
     """Handle behaviors Response from ZMK Studio RPC Protocol"""
     behaviors_response_type = request_response_behaviors.WhichOneof("response_type")
-    if behaviors_response_type == "list_all_behaviors":
-        log_dbg("behaviors", "Listing all behaviors...")
-        log_dbg("behaviors", request_response_behaviors.list_all_behaviors.behaviors)
+    # Deprecated: handled externally
+    # if behaviors_response_type == "list_all_behaviors":
+    #     log_dbg("behaviors", "Listing all behaviors...")
+    #     log_dbg("behaviors", request_response_behaviors.list_all_behaviors.behaviors)
     if behaviors_response_type == "get_behavior_details":
         behavior_id = request_response_behaviors.get_behavior_details.id
         behavior_display_name = (
