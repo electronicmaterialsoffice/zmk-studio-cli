@@ -2,13 +2,15 @@
 # SPDX-License-Identifier: MIT
 
 """
-"zmk-studio-cli keymap get-keymap" command.
+set-layer-props
 """
 
 from typing import Annotated
 
 import typer
-from ...subsystems import keymap
+
+from ...proto import studio_pb2 as studio
+from ...rpc import get_response, handle_response, send_request
 
 
 def keymap_set_layer_props(
@@ -28,4 +30,10 @@ def keymap_set_layer_props(
 ) -> None:
     """Set layer properties (name)"""
     ser = ctx.obj
-    keymap.set_layer_props(ser, layer_id, layer_name, verbose=False)
+    request = studio.Request()
+    request.request_id = 12
+    request.keymap.set_layer_props.layer_id = layer_id
+    request.keymap.set_layer_props.name = layer_name
+
+    send_request(ser, request)
+    handle_response(get_response(ser, False))

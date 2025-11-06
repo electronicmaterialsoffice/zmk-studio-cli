@@ -8,7 +8,9 @@ restore-layer
 from typing import Annotated
 
 import typer
-from ...subsystems import keymap
+
+from ...proto import studio_pb2 as studio
+from ...rpc import get_response, handle_response, send_request
 
 
 def keymap_restore_layer(
@@ -28,4 +30,10 @@ def keymap_restore_layer(
 ) -> None:
     """Restore layer with ID at chosen index"""
     ser = ctx.obj
-    keymap.restore_layer(ser, layer_id, at_index, verbose=False)
+    request = studio.Request()
+    request.request_id = 11
+    request.keymap.restore_layer.layer_id = layer_id
+    request.keymap.restore_layer.at_index = at_index
+
+    send_request(ser, request)
+    handle_response(get_response(ser, False))

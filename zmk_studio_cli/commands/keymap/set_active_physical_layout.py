@@ -2,13 +2,15 @@
 # SPDX-License-Identifier: MIT
 
 """
-"zmk-studio-cli keymap get-keymap" command.
+set-active-physical-layout
 """
 
 from typing import Annotated
 
 import typer
-from ...subsystems import keymap
+
+from ...proto import studio_pb2 as studio
+from ...rpc import get_response, handle_response, send_request
 
 
 def keymap_set_active_physical_layout(
@@ -22,4 +24,9 @@ def keymap_set_active_physical_layout(
 ) -> None:
     """Set active physical layout"""
     ser = ctx.obj
-    keymap.set_active_physical_layout(ser, layout, verbose=False)
+    request = studio.Request()
+    request.request_id = 7
+    request.keymap.set_active_physical_layout = layout
+
+    send_request(ser, request)
+    handle_response(get_response(ser, False))

@@ -7,7 +7,7 @@ ZMK Studio CLI Commands.
 
 import typer
 
-from . import core, behaviors, keymap
+from . import behaviors, core, keymap
 
 
 def register(app: typer.Typer) -> None:

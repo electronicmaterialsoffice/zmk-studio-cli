@@ -6,12 +6,17 @@ discard-changes
 """
 
 import typer
-from ...subsystems import keymap
+
+from ...proto import studio_pb2 as studio
+from ...rpc import get_response, handle_response, send_request
 
 
-def keymap_discard_changes(
-    ctx: typer.Context,
-) -> None:
+def keymap_discard_changes(ctx: typer.Context) -> None:
     """Discard keymap changes"""
     ser = ctx.obj
-    keymap.discard_changes(ser, verbose=False)
+    request = studio.Request()
+    request.request_id = 5
+    request.keymap.discard_changes = True
+
+    send_request(ser, request)
+    handle_response(get_response(ser, False))

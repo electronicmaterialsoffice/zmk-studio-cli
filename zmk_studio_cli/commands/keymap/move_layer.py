@@ -8,7 +8,9 @@ move-layer
 from typing import Annotated
 
 import typer
-from ...subsystems import keymap
+
+from ...proto import studio_pb2 as studio
+from ...rpc import get_response, handle_response, send_request
 
 
 def keymap_move_layer(
@@ -28,4 +30,10 @@ def keymap_move_layer(
 ) -> None:
     """Move layer from start to dest index"""
     ser = ctx.obj
-    keymap.move_layer(ser, start_index, dest_index, verbose=False)
+    request = studio.Request()
+    request.request_id = 8
+    request.keymap.move_layer.start_index = start_index
+    request.keymap.move_layer.dest_index = dest_index
+
+    send_request(ser, request)
+    handle_response(get_response(ser, False))

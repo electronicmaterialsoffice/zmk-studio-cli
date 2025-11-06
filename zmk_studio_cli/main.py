@@ -8,8 +8,8 @@ CLI tool to interact with keyboards via ZMK Studio RPC Protocol
 from importlib import metadata
 from typing import Annotated
 
-import typer
 import serial
+import typer
 
 from . import commands
 

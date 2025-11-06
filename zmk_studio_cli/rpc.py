@@ -6,8 +6,9 @@ ZMK Studio RPC Protocol functions
 """
 
 import serial
-from .proto import studio_pb2 as studio
+
 from . import errors
+from .proto import studio_pb2 as studio
 
 RPC_SOF = b"\xab"
 RPC_ESC = b"\xac"

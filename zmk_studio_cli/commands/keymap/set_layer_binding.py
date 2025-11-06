@@ -2,13 +2,15 @@
 # SPDX-License-Identifier: MIT
 
 """
-"zmk-studio-cli keymap get-keymap" command.
+set-layer-binding
 """
 
 from typing import Annotated
 
 import typer
-from ...subsystems import keymap
+
+from ...proto import studio_pb2 as studio
+from ...rpc import get_response, handle_response, send_request
 
 
 def keymap_set_layer_binding(
@@ -46,5 +48,13 @@ def keymap_set_layer_binding(
 ) -> None:
     """Set keymap binding on chosen layer"""
     ser = ctx.obj
-    binding = keymap.BehaviorBinding(behavior_id, param1, param2)
-    keymap.set_layer_binding(ser, layer_id, key_position, binding, verbose=False)
+    request = studio.Request()
+    request.request_id = 2
+    request.keymap.set_layer_binding.layer_id = layer_id
+    request.keymap.set_layer_binding.key_position = key_position
+    request.keymap.set_layer_binding.binding.behavior_id = behavior_id
+    request.keymap.set_layer_binding.binding.param1 = param1
+    request.keymap.set_layer_binding.binding.param2 = param2
+
+    send_request(ser, request)
+    handle_response(get_response(ser, False))

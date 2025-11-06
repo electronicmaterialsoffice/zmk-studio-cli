@@ -6,10 +6,17 @@ add-layer
 """
 
 import typer
-from ...subsystems import keymap
+
+from ...proto import studio_pb2 as studio
+from ...rpc import get_response, handle_response, send_request
 
 
 def keymap_add_layer(ctx: typer.Context) -> None:
     """Add layer to keymap"""
     ser = ctx.obj
-    keymap.add_layer(ser, verbose=False)
+    request = studio.Request()
+    request.request_id = 9
+    request.keymap.add_layer.SetInParent()
+
+    send_request(ser, request)
+    handle_response(get_response(ser, False))

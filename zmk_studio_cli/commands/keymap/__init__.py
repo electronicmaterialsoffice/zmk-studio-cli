@@ -7,17 +7,17 @@ ZMK Studio CLI keymap subcommands.
 
 import typer
 
-from .get_keymap import keymap_get_keymap
-from .set_layer_binding import keymap_set_layer_binding
-from .check_unsaved_changes import keymap_check_unsaved_changes
-from .save_changes import keymap_save_changes
-from .discard_changes import keymap_discard_changes
-from .get_physical_layouts import keymap_get_physical_layouts
-from .set_active_physical_layout import keymap_set_active_physical_layout
-from .move_layer import keymap_move_layer
 from .add_layer import keymap_add_layer
+from .check_unsaved_changes import keymap_check_unsaved_changes
+from .discard_changes import keymap_discard_changes
+from .get_keymap import keymap_get_keymap
+from .get_physical_layouts import keymap_get_physical_layouts
+from .move_layer import keymap_move_layer
 from .remove_layer import keymap_remove_layer
 from .restore_layer import keymap_restore_layer
+from .save_changes import keymap_save_changes
+from .set_active_physical_layout import keymap_set_active_physical_layout
+from .set_layer_binding import keymap_set_layer_binding
 from .set_layer_props import keymap_set_layer_props
 
 app = typer.Typer(name="keymap")

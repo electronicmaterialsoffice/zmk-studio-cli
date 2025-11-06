@@ -6,10 +6,16 @@ get-lock-state
 """
 
 import typer
-from ...subsystems import core
+
+from ...proto import studio_pb2 as studio
+from ...rpc import get_response, handle_response, send_request
 
 
 def core_get_lock_state(ctx: typer.Context) -> None:
     """Get keyboard lock state"""
     ser = ctx.obj
-    core.get_lock_state(ser, verbose=False)
+    request = studio.Request()
+    request.request_id = 2
+    request.core.get_lock_state = True
+    send_request(ser, request)
+    handle_response(get_response(ser, False))
