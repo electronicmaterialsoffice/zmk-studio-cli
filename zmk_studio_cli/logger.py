@@ -1,26 +1,37 @@
+# Copyright (c) 2025 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+"""
+rich logging for ZMK Studio CLI tool
+"""
+
 from rich.console import Console
 from rich.style import Style
 
-error_style = Style(color="red1", bold=True)
-notification_style = Style(color="dark_slate_gray3", bold=True)
+error_style = Style(color="red", bold=True)
+notification_style = Style(color="light_sea_green", bold=True)
 console = Console()
 
 
 def log_dbg(subsystem: str, *args, **kwargs):
     """Print to console"""
-    console.print(f"<dbg, {subsystem}>", *args, **kwargs)
+    header = f"<dbg, {subsystem}>"
+    console.print(header, *args, **kwargs, highlight=False)
 
 
 def log_err(subsystem: str, *args, **kwargs):
     """Print to console with error style"""
-    console.print(f"[red1]<err, {subsystem}>", *args, **kwargs, style=error_style)
+    header = f"<err, {subsystem}>"
+    console.print(header, *args, **kwargs, style=error_style, highlight=False)
 
 
 def log_notif(subsystem: str, *args, **kwargs):
     """Print to console with notification style"""
+    header = f"<notif, {subsystem}>"
     console.print(
-        f"[dark_slate_gray3]<notif, {subsystem}>",
+        header,
         *args,
         **kwargs,
         style=notification_style,
+        highlight=False,
     )
