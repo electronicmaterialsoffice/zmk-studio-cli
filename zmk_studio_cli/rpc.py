@@ -17,14 +17,22 @@ RPC_ESC = b"\xac"
 RPC_EOF = b"\xad"
 
 
-def send_request(ser: serial.Serial, request: bytes):
+def send_request(ser: serial.Serial, request: bytes, verbose: bool = False):
     """Send Request message via ZMK Studio RPC Protocol"""
-    ser.write(RPC_SOF)
-    ser.write(request.SerializeToString())
-    ser.write(RPC_EOF)
+    request_msg = b""
+    request_msg = request_msg + RPC_SOF
+    for request_chr in request.SerializeToString():
+        request_byte = request_chr.to_bytes()
+        if ((request_byte == RPC_SOF) or (request_byte == RPC_ESC) or (request_byte == RPC_EOF)):
+            request_msg = request_msg + RPC_ESC
+        request_msg = request_msg + request_byte
+    request_msg = request_msg + RPC_EOF
+    
+    if verbose is True:
+        print("<request>", request_msg)
+    ser.write(request_msg)
 
-
-def get_response(ser: serial.Serial, verbose: bool):
+def get_response(ser: serial.Serial, verbose: bool = False):
     """Get Response mesage from ZMK Studio RPC Protocol"""
     response_msg = b""
     response_chr = ser.read()
@@ -39,7 +47,7 @@ def get_response(ser: serial.Serial, verbose: bool):
                 break
             response_msg = response_msg + response_chr
     if verbose is True:
-        print(response_msg)
+        print("<response>", response_msg)
     return response_msg
 
 

@@ -13,10 +13,12 @@ from ...rpc import get_response, handle_response, send_request
 
 def keymap_check_unsaved_changes(ctx: typer.Context) -> None:
     """Check for unsaved keymap changes"""
-    ser = ctx.obj
+    ser = ctx.obj.ser
+    verbose = ctx.obj.verbose
+
     request = studio.Request()
     request.request_id = 3
     request.keymap.check_unsaved_changes = True
 
-    send_request(ser, request)
-    handle_response(get_response(ser, False))
+    send_request(ser=ser, request=request, verbose=verbose)
+    handle_response(get_response(ser=ser, verbose=verbose))

@@ -29,11 +29,13 @@ def keymap_set_layer_props(
     ] = None,
 ) -> None:
     """Set layer properties (name)"""
-    ser = ctx.obj
+    ser = ctx.obj.ser
+    verbose = ctx.obj.verbose
+
     request = studio.Request()
     request.request_id = 12
     request.keymap.set_layer_props.layer_id = layer_id
     request.keymap.set_layer_props.name = layer_name
 
-    send_request(ser, request)
-    handle_response(get_response(ser, False))
+    send_request(ser=ser, request=request, verbose=verbose)
+    handle_response(get_response(ser, verbose=verbose))

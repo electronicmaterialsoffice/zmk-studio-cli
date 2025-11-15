@@ -47,7 +47,9 @@ def keymap_set_layer_binding(
     ] = None,
 ) -> None:
     """Set keymap binding on chosen layer"""
-    ser = ctx.obj
+    ser = ctx.obj.ser
+    verbose = ctx.obj.verbose
+
     request = studio.Request()
     request.request_id = 2
     request.keymap.set_layer_binding.layer_id = layer_id
@@ -56,5 +58,5 @@ def keymap_set_layer_binding(
     request.keymap.set_layer_binding.binding.param1 = param1
     request.keymap.set_layer_binding.binding.param2 = param2
 
-    send_request(ser, request)
-    handle_response(get_response(ser, False))
+    send_request(ser=ser, request=request, verbose=verbose)
+    handle_response(get_response(ser=ser, verbose=verbose))

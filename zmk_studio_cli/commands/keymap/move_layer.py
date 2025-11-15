@@ -29,11 +29,13 @@ def keymap_move_layer(
     ] = None,
 ) -> None:
     """Move layer from start to dest index"""
-    ser = ctx.obj
+    ser = ctx.obj.ser
+    verbose = ctx.obj.verbose
+
     request = studio.Request()
     request.request_id = 8
     request.keymap.move_layer.start_index = start_index
     request.keymap.move_layer.dest_index = dest_index
 
-    send_request(ser, request)
-    handle_response(get_response(ser, False))
+    send_request(ser=ser, request=request, verbose=verbose)
+    handle_response(get_response(ser=ser, verbose=verbose))

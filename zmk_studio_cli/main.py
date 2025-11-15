@@ -34,6 +34,13 @@ def main(
             help="Serial port to use with USB transport",
         ),
     ],
+    verbose: Annotated[
+        bool,
+        typer.Option(
+            "--verbose",
+            help="Enable verbose printing of outbound requests and incoming responses",
+        ),
+    ] = False,
     _: Annotated[
         bool,
         typer.Option(
@@ -48,5 +55,15 @@ def main(
     """
     ZMK Studio command line tool
     """
-    ser = serial.Serial(port)
-    ctx.obj = ser
+    ser = serial.Serial(port, timeout=timeoutDefaultSeconds)
+    ctx.obj = Config(ser=ser, verbose=verbose)
+
+
+timeoutDefaultSeconds = 10
+
+
+class Config:
+
+    def __init__(self, ser, verbose=False):
+        self.ser = ser
+        self.verbose = verbose

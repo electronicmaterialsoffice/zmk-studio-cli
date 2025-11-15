@@ -23,9 +23,11 @@ def behaviors_get_behavior_details(
     ] = None,
 ) -> None:
     """Get behavior name/metadata from ID"""
-    ser = ctx.obj
+    ser = ctx.obj.ser
+    verbose = ctx.obj.verbose
+
     request = studio.Request()
     request.request_id = 2
     request.behaviors.get_behavior_details.behavior_id = behavior_id
-    send_request(ser, request)
-    handle_response(get_response(ser, False))
+    send_request(ser=ser, request=request, verbose=verbose)
+    handle_response(get_response(ser=ser, verbose=verbose))

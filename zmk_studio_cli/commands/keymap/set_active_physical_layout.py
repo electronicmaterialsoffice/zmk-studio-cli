@@ -23,10 +23,12 @@ def keymap_set_active_physical_layout(
     ] = None,
 ) -> None:
     """Set active physical layout"""
-    ser = ctx.obj
+    ser = ctx.obj.ser
+    verbose = ctx.obj.verbose
+
     request = studio.Request()
     request.request_id = 7
     request.keymap.set_active_physical_layout = layout
 
-    send_request(ser, request)
-    handle_response(get_response(ser, False))
+    send_request(ser=ser, request=request, verbose=verbose)
+    handle_response(get_response(ser=ser, verbose=verbose))

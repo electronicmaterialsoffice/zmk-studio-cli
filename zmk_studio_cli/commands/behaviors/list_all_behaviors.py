@@ -14,13 +14,15 @@ from ...rpc import get_response, handle_response, send_request
 
 def behaviors_list_all_behaviors(ctx: typer.Context) -> None:
     """Retrieve all stored behavior IDs"""
-    ser = ctx.obj
+    ser = ctx.obj.ser
+    verbose = ctx.obj.verbose
+
     request = studio.Request()
     request.request_id = 1
     request.behaviors.list_all_behaviors = True
-    send_request(ser, request)
+    send_request(ser=ser, request=request, verbose=verbose)
 
-    response_msg = get_response(ser, False)
+    response_msg = get_response(ser=ser, verbose=verbose)
     response = studio.Response()
     response.ParseFromString(response_msg)
 
@@ -29,9 +31,9 @@ def behaviors_list_all_behaviors(ctx: typer.Context) -> None:
         behavior_request = studio.Request()
         behavior_request.request_id = 2
         behavior_request.behaviors.get_behavior_details.behavior_id = behavior_id
-        send_request(ser, behavior_request)
+        send_request(ser=ser, request=behavior_request, verbose=verbose)
 
-        behavior_response_msg = get_response(ser, False)
+        behavior_response_msg = get_response(ser=ser, verbose=verbose)
         behavior_response = studio.Response()
         behavior_response.ParseFromString(behavior_response_msg)
         behavior_details = (
