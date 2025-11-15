@@ -22,6 +22,7 @@ dependencies = [
   "typer >= 0.16.0, < 0.17.0",
   "protobuf >= 6.33.0, < 7.0.0",
   "pyserial >= 3.5, < 4.0",
+  "fix-protobuf-imports >= 0.1.7, < 0.2.0",
 ]
 dynamic = ["version"]
 
@@ -56,6 +57,10 @@ disable = [
   "too-many-locals",
   "too-many-positional-arguments",
 ]
+
+[tool.python_proto_importer]
+inputs = ["zmk-studio-messages/proto/zmk/*.proto"]
+out = "proto/"
 
 [tool.setuptools]
 packages = ["zmk_studio_cli"]
