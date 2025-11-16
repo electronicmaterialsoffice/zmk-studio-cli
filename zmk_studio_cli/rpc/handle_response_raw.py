@@ -9,13 +9,13 @@ import google.protobuf
 
 from ..logger import log_err
 from ..proto import studio_pb2 as studio
-from .subsystems.meta import handle_request_response_meta
-from .subsystems.core import handle_request_response_core, handle_notification_core
 from .subsystems.behaviors import handle_request_response_behaviors
+from .subsystems.core import handle_notification_core, handle_request_response_core
 from .subsystems.keymap import (
-    handle_request_response_keymap,
     handle_notification_keymap,
+    handle_request_response_keymap,
 )
+from .subsystems.meta import handle_request_response_meta
 
 
 def handle_response_raw(response_msg: bytes):

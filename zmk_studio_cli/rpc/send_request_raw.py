@@ -4,7 +4,8 @@
 """ZMK Studio RPC Protocol send request"""
 
 import serial
-from .special_characters import RPC_SOF, RPC_ESC, RPC_EOF
+
+from .special_characters import RPC_EOF, RPC_ESC, RPC_SOF
 
 
 def send_request_raw(ser: serial.Serial, request: bytes, verbose: bool = False):

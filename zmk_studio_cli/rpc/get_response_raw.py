@@ -4,7 +4,8 @@
 """ZMK Studio RPC Protocol get response"""
 
 import serial
-from .special_characters import RPC_SOF, RPC_ESC, RPC_EOF
+
+from .special_characters import RPC_EOF, RPC_ESC, RPC_SOF
 
 
 def get_response_raw(ser: serial.Serial, verbose: bool = False):

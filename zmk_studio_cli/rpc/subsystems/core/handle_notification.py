@@ -2,9 +2,9 @@
 # SPDX-License-Identifier: MIT
 """core Notification handler"""
 
-from .lockstate import LOCKSTATE
 from ....logger import log_notif
 from ....proto import core_pb2 as core
+from .lockstate import LOCKSTATE
 
 
 def handle_notification(notification: core.Notification):

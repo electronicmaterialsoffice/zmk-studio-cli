@@ -2,9 +2,9 @@
 # SPDX-License-Identifier: MIT
 """keymap Response handler"""
 
+from ....logger import log_dbg, log_err
 from ....proto import keymap_pb2 as keymap
 from .error_conditions import ERR_SET_ACTIVE_PHYSICAL_LAYOUT
-from ....logger import log_dbg, log_err
 
 
 def handle_response_get_physical_layouts(response: keymap.Response):

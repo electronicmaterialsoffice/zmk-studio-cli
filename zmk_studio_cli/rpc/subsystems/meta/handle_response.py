@@ -2,9 +2,9 @@
 # SPDX-License-Identifier: MIT
 """meta Response handler"""
 
-from .error_conditions import ERROR_CONDITIONS
 from ....logger import log_err
 from ....proto import meta_pb2 as meta
+from .error_conditions import ERROR_CONDITIONS
 
 
 def handle_response(response: meta.Response):

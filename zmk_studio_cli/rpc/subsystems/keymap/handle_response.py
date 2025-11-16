@@ -4,22 +4,22 @@
 
 from ....proto import keymap_pb2 as keymap
 from .handle_response_keymap import (
-    handle_response_get_keymap,
-    handle_response_set_layer_binding,
     handle_response_check_unsaved_changes,
-    handle_response_save_changes,
     handle_response_discard_changes,
+    handle_response_get_keymap,
+    handle_response_save_changes,
+    handle_response_set_layer_binding,
+)
+from .handle_response_layers import (
+    handle_response_add_layer,
+    handle_response_move_layer,
+    handle_response_remove_layer,
+    handle_response_restore_layer,
+    handle_response_set_layer_props,
 )
 from .handle_response_physical_layouts import (
     handle_response_get_physical_layouts,
     handle_response_set_active_physical_layout,
-)
-from .handle_response_layers import (
-    handle_response_move_layer,
-    handle_response_add_layer,
-    handle_response_remove_layer,
-    handle_response_restore_layer,
-    handle_response_set_layer_props,
 )
 
 

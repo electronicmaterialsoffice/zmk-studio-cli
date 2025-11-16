@@ -3,9 +3,10 @@
 """ZMK Studio RPC Protocol functions"""
 
 import serial
-from .send_request_raw import send_request_raw
+
 from .get_response_raw import get_response_raw
 from .handle_response_raw import handle_response_raw
+from .send_request_raw import send_request_raw
 
 
 def rpc_send_request(ser: serial.Serial, request: bytes, verbose: bool = False):
