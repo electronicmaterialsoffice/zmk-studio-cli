@@ -55,11 +55,11 @@ def main(
     """
     ZMK Studio command line tool
     """
-    ser = serial.Serial(port, timeout=timeoutDefaultSeconds)
+    ser = serial.Serial(port, timeout=TIMEOUT_DEFAULT_SECONDS)
     ctx.obj = Config(ser=ser, verbose=verbose)
 
 
-timeoutDefaultSeconds = 10
+TIMEOUT_DEFAULT_SECONDS = 10
 
 
 class Config:
