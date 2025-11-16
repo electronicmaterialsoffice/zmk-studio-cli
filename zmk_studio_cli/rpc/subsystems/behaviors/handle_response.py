@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: MIT
 """behaviors Response handler"""
 
-from ...logger import log_dbg
-from ...proto import behaviors_pb2 as behaviors
+from ....logger import log_dbg
+from ....proto import behaviors_pb2 as behaviors
 
 
 def handle_response(response: behaviors.Response):

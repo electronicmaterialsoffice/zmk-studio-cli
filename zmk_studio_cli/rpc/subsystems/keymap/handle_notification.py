@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: MIT
 """keymap Notification handler"""
 
-from ...logger import log_notif
-from ...proto import keymap_pb2 as keymap
+from ....logger import log_notif
+from ....proto import keymap_pb2 as keymap
 
 
 def handle_notification(notification: keymap.Notification):

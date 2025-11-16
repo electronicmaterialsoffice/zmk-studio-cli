@@ -3,8 +3,8 @@
 """meta Response handler"""
 
 from .error_conditions import ERROR_CONDITIONS
-from ...logger import log_err
-from ...proto import meta_pb2 as meta
+from ....logger import log_err
+from ....proto import meta_pb2 as meta
 
 
 def handle_response(response: meta.Response):

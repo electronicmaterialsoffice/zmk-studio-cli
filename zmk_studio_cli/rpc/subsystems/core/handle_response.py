@@ -3,8 +3,8 @@
 """core Response handler"""
 
 from .lockstate import LOCKSTATE
-from ...logger import log_dbg
-from ...proto import core_pb2 as core
+from ....logger import log_dbg
+from ....proto import core_pb2 as core
 
 
 def handle_response(response: core.Response):

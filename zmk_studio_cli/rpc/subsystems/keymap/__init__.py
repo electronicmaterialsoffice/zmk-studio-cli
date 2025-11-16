@@ -4,7 +4,7 @@
 
 from .handle_response import handle_response
 from .handle_notification import handle_notification
-from ...proto import studio_pb2 as studio
+from ....proto import studio_pb2 as studio
 
 
 def handle_request_response_keymap(request_response: studio.RequestResponse.keymap):

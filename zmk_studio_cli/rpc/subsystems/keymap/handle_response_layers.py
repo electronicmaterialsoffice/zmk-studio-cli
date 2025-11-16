@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 """keymap Response handler"""
 
-from ...proto import keymap_pb2 as keymap
+from ....proto import keymap_pb2 as keymap
 from .error_conditions import (
     ERR_MOVE_LAYER,
     ERR_ADD_LAYER,
@@ -11,7 +11,7 @@ from .error_conditions import (
     RESP_SET_LAYER_PROPS,
 )
 
-from ...logger import log_dbg, log_err
+from ....logger import log_dbg, log_err
 
 
 def handle_response_move_layer(response: keymap.Reponse):

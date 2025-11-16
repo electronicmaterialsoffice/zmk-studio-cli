@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 """keymap Response handler"""
 
-from ...proto import keymap_pb2 as keymap
+from ....proto import keymap_pb2 as keymap
 from .handle_response_keymap import (
     handle_response_get_keymap,
     handle_response_set_layer_binding,

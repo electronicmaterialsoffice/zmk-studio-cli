@@ -63,6 +63,7 @@ TIMEOUT_DEFAULT_SECONDS = 10
 
 
 class Config:
+    """Configuration class with serial port information to forward to commands"""
 
     def __init__(self, ser, verbose=False):
         self.ser = ser

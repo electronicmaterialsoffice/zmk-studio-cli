@@ -2,13 +2,13 @@
 # SPDX-License-Identifier: MIT
 """keymap Response handler"""
 
-from ...proto import keymap_pb2 as keymap
+from ....proto import keymap_pb2 as keymap
 from .error_conditions import (
     ERR_SAVE_CHANGES,
     RESP_SET_LAYER_BINDING,
 )
 
-from ...logger import log_dbg
+from ....logger import log_dbg
 
 
 def handle_response_get_keymap(response: keymap.Response):

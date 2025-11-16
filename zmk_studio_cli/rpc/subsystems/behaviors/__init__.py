@@ -3,7 +3,7 @@
 """ZMK Studio behaviors RPC handlers"""
 
 from .handle_response import handle_response
-from ...proto import studio_pb2 as studio
+from ....proto import studio_pb2 as studio
 
 
 def handle_request_response_behaviors(
