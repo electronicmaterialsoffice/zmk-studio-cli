@@ -32,7 +32,7 @@ app.command(name="move-layer")(keymap_move_layer)
 app.command(name="add-layer")(keymap_add_layer)
 app.command(name="remove-layer")(keymap_remove_layer)
 app.command(name="restore-layer")(keymap_restore_layer)
-app.command(name="set_layer_props")(keymap_set_layer_props)
+app.command(name="set-layer-props")(keymap_set_layer_props)
 
 
 @app.callback()
