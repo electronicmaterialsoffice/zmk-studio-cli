@@ -1,6 +1,6 @@
 # Copyright (c) 2025 The ZMK Contributors
 # SPDX-License-Identifier: MIT
-"""ZMK Studio keymap"""
+"""keymap errors"""
 
 ERR_SAVE_CHANGES = ["OK", "GENERIC", "NOT_SUPPORTED", "NO_SPACE"]
 RESP_SET_LAYER_BINDING = [
