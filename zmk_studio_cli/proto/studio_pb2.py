@@ -22,14 +22,14 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-import meta_pb2 as meta__pb2
-import core_pb2 as core__pb2
-import behaviors_pb2 as behaviors__pb2
-import keymap_pb2 as keymap__pb2
-import sensors_pb2 as sensors__pb2
+from . import meta_pb2 as meta__pb2
+from . import core_pb2 as core__pb2
+from . import behaviors_pb2 as behaviors__pb2
+from . import keymap_pb2 as keymap__pb2
+from . import sensors_pb2 as sensors__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cstudio.proto\x12\nzmk.studio\x1a\nmeta.proto\x1a\ncore.proto\x1a\x0f\x62\x65haviors.proto\x1a\x0ckeymap.proto\x1a\rsensors.proto\"\xca\x01\n\x07Request\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12!\n\x04\x63ore\x18\x03 \x01(\x0b\x32\x11.zmk.core.RequestH\x00\x12+\n\tbehaviors\x18\x04 \x01(\x0b\x32\x16.zmk.behaviors.RequestH\x00\x12%\n\x06keymap\x18\x05 \x01(\x0b\x32\x13.zmk.keymap.RequestH\x00\x12\'\n\x07sensors\x18\x06 \x01(\x0b\x32\x14.zmk.sensors.RequestH\x00\x42\x0b\n\tsubsystem\"}\n\x08Response\x12\x37\n\x10request_response\x18\x01 \x01(\x0b\x32\x1b.zmk.studio.RequestResponseH\x00\x12\x30\n\x0cnotification\x18\x02 \x01(\x0b\x32\x18.zmk.studio.NotificationH\x00\x42\x06\n\x04type\"\xfa\x01\n\x0fRequestResponse\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\"\n\x04meta\x18\x02 \x01(\x0b\x32\x12.zmk.meta.ResponseH\x00\x12\"\n\x04\x63ore\x18\x03 \x01(\x0b\x32\x12.zmk.core.ResponseH\x00\x12,\n\tbehaviors\x18\x04 \x01(\x0b\x32\x17.zmk.behaviors.ResponseH\x00\x12&\n\x06keymap\x18\x05 \x01(\x0b\x32\x14.zmk.keymap.ResponseH\x00\x12(\n\x07sensors\x18\x06 \x01(\x0b\x32\x15.zmk.sensors.ResponseH\x00\x42\x0b\n\tsubsystem\"o\n\x0cNotification\x12&\n\x04\x63ore\x18\x02 \x01(\x0b\x32\x16.zmk.core.NotificationH\x00\x12*\n\x06keymap\x18\x05 \x01(\x0b\x32\x18.zmk.keymap.NotificationH\x00\x42\x0b\n\tsubsystemb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cstudio.proto\x12\nzmk.studio\x1a\nmeta.proto\x1a\ncore.proto\x1a\x0f\x62\x65haviors.proto\x1a\x0ckeymap.proto\x1a\rsensors.proto\"\xca\x01\n\x07Request\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12!\n\x04\x63ore\x18\x03 \x01(\x0b\x32\x11.zmk.core.RequestH\x00\x12+\n\tbehaviors\x18\x04 \x01(\x0b\x32\x16.zmk.behaviors.RequestH\x00\x12%\n\x06keymap\x18\x05 \x01(\x0b\x32\x13.zmk.keymap.RequestH\x00\x12\'\n\x07sensors\x18\x06 \x01(\x0b\x32\x14.zmk.sensors.RequestH\x00\x42\x0b\n\tsubsystem\"}\n\x08Response\x12\x37\n\x10request_response\x18\x01 \x01(\x0b\x32\x1b.zmk.studio.RequestResponseH\x00\x12\x30\n\x0cnotification\x18\x02 \x01(\x0b\x32\x18.zmk.studio.NotificationH\x00\x42\x06\n\x04type\"\xfa\x01\n\x0fRequestResponse\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\"\n\x04meta\x18\x02 \x01(\x0b\x32\x12.zmk.meta.ResponseH\x00\x12\"\n\x04\x63ore\x18\x03 \x01(\x0b\x32\x12.zmk.core.ResponseH\x00\x12,\n\tbehaviors\x18\x04 \x01(\x0b\x32\x17.zmk.behaviors.ResponseH\x00\x12&\n\x06keymap\x18\x05 \x01(\x0b\x32\x14.zmk.keymap.ResponseH\x00\x12(\n\x07sensors\x18\x06 \x01(\x0b\x32\x15.zmk.sensors.ResponseH\x00\x42\x0b\n\tsubsystem\"\x9d\x01\n\x0cNotification\x12&\n\x04\x63ore\x18\x02 \x01(\x0b\x32\x16.zmk.core.NotificationH\x00\x12*\n\x06keymap\x18\x05 \x01(\x0b\x32\x18.zmk.keymap.NotificationH\x00\x12,\n\x07sensors\x18\x06 \x01(\x0b\x32\x19.zmk.sensors.NotificationH\x00\x42\x0b\n\tsubsystemb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -42,6 +42,6 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_RESPONSE']._serialized_end=428
   _globals['_REQUESTRESPONSE']._serialized_start=431
   _globals['_REQUESTRESPONSE']._serialized_end=681
-  _globals['_NOTIFICATION']._serialized_start=683
-  _globals['_NOTIFICATION']._serialized_end=794
+  _globals['_NOTIFICATION']._serialized_start=684
+  _globals['_NOTIFICATION']._serialized_end=841
 # @@protoc_insertion_point(module_scope)

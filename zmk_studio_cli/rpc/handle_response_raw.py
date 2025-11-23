@@ -16,6 +16,10 @@ from .subsystems.keymap import (
     handle_request_response_keymap,
 )
 from .subsystems.meta import handle_request_response_meta
+from .subsystems.sensors import (
+    handle_notification_sensors,
+    handle_request_response_sensors,
+)
 
 
 def handle_response_raw(response_msg: bytes):
@@ -50,6 +54,8 @@ def handle_request_response(request_response: studio.RequestResponse):
         handle_request_response_behaviors(request_response.behaviors)
     if req_response_subsystem == "keymap":
         handle_request_response_keymap(request_response.keymap)
+    if req_response_subsystem == "sensors":
+        handle_request_response_sensors(request_response.sensors)
 
 
 def handle_notification(notification: studio.Notification):
@@ -60,3 +66,5 @@ def handle_notification(notification: studio.Notification):
         handle_notification_core(notification.core)
     if notification_subsystem == "keymap":
         handle_notification_keymap(notification.keymap)
+    if notification_subsystem == "sensors":
+        handle_notification_sensors(notification.sensors)

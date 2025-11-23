@@ -24,19 +24,31 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rsensors.proto\x12\x0bzmk.sensors\"]\n\x07Request\x12\x42\n\x12get_sensor_binding\x18\x01 \x01(\x0b\x32$.zmk.sensors.GetSensorBindingRequestH\x00\x42\x0e\n\x0crequest_type\"U\n\x08Response\x12\x38\n\x12get_sensor_binding\x18\x01 \x01(\x0b\x32\x1a.zmk.sensors.SensorBindingH\x00\x42\x0f\n\rresponse_type\"A\n\x17GetSensorBindingRequest\x12\x10\n\x08layer_id\x18\x01 \x01(\r\x12\x14\n\x0csensor_index\x18\x02 \x01(\x05\"D\n\rSensorBinding\x12\x13\n\x0b\x62\x65havior_id\x18\x01 \x01(\x11\x12\x0e\n\x06param1\x18\x02 \x01(\r\x12\x0e\n\x06param2\x18\x03 \x01(\rb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rsensors.proto\x12\x0bzmk.sensors\"\x80\x02\n\x07Request\x12\x42\n\x12get_sensor_binding\x18\x01 \x01(\x0b\x32$.zmk.sensors.GetSensorBindingRequestH\x00\x12\x42\n\x12set_sensor_binding\x18\x02 \x01(\x0b\x32$.zmk.sensors.SetSensorBindingRequestH\x00\x12\x1b\n\x11get_sensor_config\x18\x03 \x01(\rH\x00\x12@\n\x11set_sensor_config\x18\x04 \x01(\x0b\x32#.zmk.sensors.SetSensorConfigRequestH\x00\x42\x0e\n\x0crequest_type\"\x95\x02\n\x08Response\x12\x38\n\x12get_sensor_binding\x18\x01 \x01(\x0b\x32\x1a.zmk.sensors.SensorBindingH\x00\x12\x43\n\x12set_sensor_binding\x18\x02 \x01(\x0e\x32%.zmk.sensors.SetSensorBindingResponseH\x00\x12\x36\n\x11get_sensor_config\x18\x03 \x01(\x0b\x32\x19.zmk.sensors.SensorConfigH\x00\x12\x41\n\x11set_sensor_config\x18\x04 \x01(\x0e\x32$.zmk.sensors.SetSensorConfigResponseH\x00\x42\x0f\n\rresponse_type\"M\n\x0cNotification\x12(\n\x1eunsaved_changes_status_changed\x18\x01 \x01(\x08H\x00\x42\x13\n\x11notification_type\"A\n\x17GetSensorBindingRequest\x12\x10\n\x08layer_id\x18\x01 \x01(\r\x12\x14\n\x0csensor_index\x18\x02 \x01(\x05\"n\n\x17SetSensorBindingRequest\x12\x10\n\x08layer_id\x18\x01 \x01(\r\x12\x14\n\x0csensor_index\x18\x02 \x01(\x05\x12+\n\x07\x62inding\x18\x03 \x01(\x0b\x32\x1a.zmk.sensors.SensorBinding\"b\n\rSensorBinding\x12\x1c\n\x14\x63omputed_behavior_id\x18\x01 \x01(\x11\x12\x13\n\x0b\x62\x65havior_id\x18\x02 \x01(\x11\x12\x0e\n\x06param1\x18\x03 \x01(\r\x12\x0e\n\x06param2\x18\x04 \x01(\r\"M\n\x16SetSensorConfigRequest\x12\x14\n\x0csensor_index\x18\x01 \x01(\r\x12\x1d\n\x15triggers_per_rotation\x18\x02 \x01(\r\"-\n\x0cSensorConfig\x12\x1d\n\x15triggers_per_rotation\x18\x01 \x01(\r*\xc3\x01\n\x18SetSensorBindingResponse\x12\x1e\n\x1aSET_SENSOR_BINDING_RESP_OK\x10\x00\x12)\n%SET_SENSOR_BINDING_RESP_INVALID_INDEX\x10\x01\x12,\n(SET_SENSOR_BINDING_RESP_INVALID_BEHAVIOR\x10\x02\x12.\n*SET_SENSOR_BINDING_RESP_INVALID_PARAMETERS\x10\x03*\x91\x01\n\x17SetSensorConfigResponse\x12\x1d\n\x19SET_SENSOR_CONFIG_RESP_OK\x10\x00\x12(\n$SET_SENSOR_CONFIG_RESP_INVALID_INDEX\x10\x01\x12-\n)SET_SENSOR_CONFIG_RESP_INVALID_PARAMETERS\x10\x02\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'sensors_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_REQUEST']._serialized_start=30
-  _globals['_REQUEST']._serialized_end=123
-  _globals['_RESPONSE']._serialized_start=125
-  _globals['_RESPONSE']._serialized_end=210
-  _globals['_GETSENSORBINDINGREQUEST']._serialized_start=212
-  _globals['_GETSENSORBINDINGREQUEST']._serialized_end=277
-  _globals['_SENSORBINDING']._serialized_start=279
-  _globals['_SENSORBINDING']._serialized_end=347
+  _globals['_SETSENSORBINDINGRESPONSE']._serialized_start=1054
+  _globals['_SETSENSORBINDINGRESPONSE']._serialized_end=1249
+  _globals['_SETSENSORCONFIGRESPONSE']._serialized_start=1252
+  _globals['_SETSENSORCONFIGRESPONSE']._serialized_end=1397
+  _globals['_REQUEST']._serialized_start=31
+  _globals['_REQUEST']._serialized_end=287
+  _globals['_RESPONSE']._serialized_start=290
+  _globals['_RESPONSE']._serialized_end=567
+  _globals['_NOTIFICATION']._serialized_start=569
+  _globals['_NOTIFICATION']._serialized_end=646
+  _globals['_GETSENSORBINDINGREQUEST']._serialized_start=648
+  _globals['_GETSENSORBINDINGREQUEST']._serialized_end=713
+  _globals['_SETSENSORBINDINGREQUEST']._serialized_start=715
+  _globals['_SETSENSORBINDINGREQUEST']._serialized_end=825
+  _globals['_SENSORBINDING']._serialized_start=827
+  _globals['_SENSORBINDING']._serialized_end=925
+  _globals['_SETSENSORCONFIGREQUEST']._serialized_start=927
+  _globals['_SETSENSORCONFIGREQUEST']._serialized_end=1004
+  _globals['_SENSORCONFIG']._serialized_start=1006
+  _globals['_SENSORCONFIG']._serialized_end=1051
 # @@protoc_insertion_point(module_scope)
