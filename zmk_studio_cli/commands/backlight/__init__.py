@@ -15,12 +15,12 @@ from .backlight_set_brightness import backlight_set_brightness
 from .backlight_toggle import backlight_toggle
 
 app = typer.Typer(name="backlight")
-app.command(name="backlight-on")(backlight_on)
-app.command(name="backlight-off")(backlight_off)
-app.command(name="backlight-toggle")(backlight_toggle)
-app.command(name="backlight-is-on")(backlight_is_on)
-app.command(name="backlight-get-brightness")(backlight_get_brightness)
-app.command(name="backlight-set-brightness")(backlight_set_brightness)
+app.command(name="on")(backlight_on)
+app.command(name="off")(backlight_off)
+app.command(name="toggle")(backlight_toggle)
+app.command(name="is-on")(backlight_is_on)
+app.command(name="get-brightness")(backlight_get_brightness)
+app.command(name="set-brightness")(backlight_set_brightness)
 
 
 @app.callback()
