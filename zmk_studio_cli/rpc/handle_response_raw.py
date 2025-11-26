@@ -9,6 +9,7 @@ import google.protobuf
 
 from ..logger import log_err
 from ..proto import studio_pb2 as studio
+from .subsystems.altar_ii import handle_request_response_altar_ii
 from .subsystems.behaviors import handle_request_response_behaviors
 from .subsystems.core import handle_notification_core, handle_request_response_core
 from .subsystems.keymap import (
@@ -50,6 +51,8 @@ def handle_request_response(request_response: studio.RequestResponse):
         handle_request_response_behaviors(request_response.behaviors)
     if req_response_subsystem == "keymap":
         handle_request_response_keymap(request_response.keymap)
+    if req_response_subsystem == "altar_ii":
+        handle_request_response_altar_ii(request_response.altar_ii)
 
 
 def handle_notification(notification: studio.Notification):
