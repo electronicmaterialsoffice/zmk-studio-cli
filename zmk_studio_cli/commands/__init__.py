@@ -7,7 +7,7 @@ ZMK Studio CLI Commands.
 
 import typer
 
-from . import behaviors, core, keymap
+from . import behaviors, core, haptics, keymap
 
 
 def register(app: typer.Typer) -> None:
@@ -15,3 +15,4 @@ def register(app: typer.Typer) -> None:
     app.add_typer(core.app)
     app.add_typer(behaviors.app)
     app.add_typer(keymap.app)
+    app.add_typer(haptics.app)
