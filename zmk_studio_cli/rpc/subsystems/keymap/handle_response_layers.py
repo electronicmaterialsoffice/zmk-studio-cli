@@ -56,3 +56,33 @@ def handle_response_set_layer_props(response: keymap.Response):
         log_dbg("keymap", "SUCCESS")
     else:
         log_err("keymap", RESP_SET_LAYER_PROPS[resp_err])
+
+
+def handle_response_layer_active(response: keymap.Response):
+    """Print layer active state at chosen layer ID"""
+    log_dbg("keymap", f"Layer active: {response.layer_active}")
+
+
+def handle_response_layer_locked(response: keymap.Response):
+    """Print layer lock state at chosen layer ID"""
+    log_dbg("keymap", f"Layer locked: {response.layer_locked}")
+
+
+def handle_response_layer_activate(response: keymap.Response):
+    """Print layer activate response at chosen layer ID"""
+    log_dbg("keymap", f"Layer activate: {response.layer_activate}")
+
+
+def handle_response_layer_deactivate(response: keymap.Response):
+    """Print layer deactivate response at chosen layer ID"""
+    log_dbg("keymap", f"Layer deactivate: {response.layer_deactivate}")
+
+
+def handle_response_layer_toggle(response: keymap.Response):
+    """Print layer toggle response at chosen layer ID"""
+    log_dbg("keymap", f"Layer toggle: {response.layer_toggle}")
+
+
+def handle_response_layer_to(response: keymap.Response):
+    """Print layer to response at chosen layer ID"""
+    log_dbg("keymap", f"Layer to: {response.layer_to}")
