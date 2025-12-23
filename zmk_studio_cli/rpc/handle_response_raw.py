@@ -10,6 +10,7 @@ import google.protobuf
 from ..logger import log_err
 from ..proto import studio_pb2 as studio
 from .subsystems.behaviors import handle_request_response_behaviors
+from .subsystems.combos import handle_request_response_combos
 from .subsystems.core import handle_notification_core, handle_request_response_core
 from .subsystems.keymap import (
     handle_notification_keymap,
@@ -48,6 +49,8 @@ def handle_request_response(request_response: studio.RequestResponse):
         handle_request_response_core(request_response.core)
     if req_response_subsystem == "behaviors":
         handle_request_response_behaviors(request_response.behaviors)
+    if req_response_subsystem == "combos":
+        handle_request_response_combos(request_response.combos)
     if req_response_subsystem == "keymap":
         handle_request_response_keymap(request_response.keymap)
 
