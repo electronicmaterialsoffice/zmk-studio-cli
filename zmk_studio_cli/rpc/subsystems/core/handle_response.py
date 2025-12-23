@@ -16,6 +16,12 @@ def handle_response(response: core.Response):
         handle_response_get_lock_state(response=response)
     if response_type == "reset_settings":
         handle_response_reset_settings(response=response)
+    if response_type == "save_changes":
+        handle_response_save_changes(response=response)
+    if response_type == "discard_changes":
+        handle_response_discard_changes(response=response)
+    if response_type == "check_unsaved_changes":
+        handle_response_check_unsaved_changes(response=response)
 
 
 def handle_response_get_device_info(response: core.Response):
@@ -34,3 +40,21 @@ def handle_response_get_lock_state(response: core.Response):
 def handle_response_reset_settings(response: core.Response):
     """Print reset settings status"""
     log_dbg("core", f"Reset settings: {response.reset_settings}")
+
+
+def handle_response_save_changes(response: core.Response):
+    """Print check unsaved changes"""
+    res = response.save_changes
+    log_dbg("core", f"saved changes? {res}")
+
+
+def handle_response_discard_changes(response: core.Response):
+    """Print discard changes result"""
+    res = response.discard_changes
+    log_dbg("core", f"discard changes? {res}")
+
+
+def handle_response_check_unsaved_changes(response: core.Response):
+    """Print check unsaved changes"""
+    unsaved = response.check_unsaved_changes
+    log_dbg("core", f"Unsaved changes? {unsaved}")
